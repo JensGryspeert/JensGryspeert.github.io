@@ -1,0 +1,127 @@
+<html>
+
+<head>
+
+  <link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="http://bootswatch.com/cosmo/bootstrap.min.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/weather-icons.css">
+
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <title>Jens Gryspeert Weather App</title>
+
+</head>
+
+<body>
+
+  <!-- Navbar Setup-->
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+      <!-- Brand and toggle -->
+      <div class="navbar-header">
+        <a class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <ul class="nav navbar-nav navbar-right">
+        </button>
+        <a class="navbar-brand" href="#"><img src="http://i58.tinypic.com/6ehwuv.png" class="logo" /></a>
+      </div>
+
+      <!-- location search and reset to current location -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+        <!-- Insert current date & time -->
+        <div class="nav navbar-nav navbar-left">
+          <p id="para1" class="navbar-text centertext">Current Date & Time</p>
+        </div>
+
+        <div class="navbar-form navbar-right form-group">
+          <input type="text" id="zipinput" class="form-control" placeholder="Search U.S. Zip Codes">
+          <button type="button" id="zipsubmit" class="btn btn-default">Submit</button>
+        </div>
+
+        <div>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a id="unitswitch"><span class="fa fa-balance-scale"></span>  Switch to Metric</a></li>
+            <li><a href="#" id="locationreset"><span class="fa fa-map-marker"></span> Reset  Location</a></li>
+          </ul>
+        </div>
+      </div> <!-- /.navbar-collapse -->
+    </div> <!-- /.container-fluid -->
+  </nav>
+
+  <!-- App Heading--><div class="container-fluid">
+	<div class="row">
+		<div class="col-xs-6" style="text-align: right; margin-top: 80px">
+      <div id="icon_img"></div>
+    </div>
+      <div class="col-xs-6" style="margin-top: 70px">
+         <div id="temp"></div>
+			</div>
+	</div>
+  <div class="row">
+    <div class="col-xs-6">
+
+        <div id="minTemp"></div>
+    </div>
+    <div class="col-xs-6">
+        <div id="maxTemp"></div>
+    </div>
+  </div>
+</div>
+<script>
+document.getElementById("para1").innerHTML = formatAMPM();
+
+function formatAMPM() {
+var d = new Date(),
+    minutes = d.getMinutes().toString().length == 1 ? '0'+d.getMinutes() : d.getMinutes(),
+    hours = d.getHours().toString().length == 1 ? '0'+d.getHours() : d.getHours(),
+    ampm = d.getHours() >= 12 ? '' : '',
+    months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+    days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+return days[d.getDay()]+' '+months[d.getMonth()]+' '+d.getDate()+' '+d.getFullYear()+' '+hours+':'+minutes+ampm;
+}
+
+/*
+Here is the jQuery .get() function. There are some other jQuery functions that deal with Ajax, but this is a simple one.
+Notice the parameters that get() takes: a URL and an anonymous function.
+The anonymous function takes as a parameter, a variable that will hold the data that comes in from the URL (check out the URL in a browser to see what's there).
+A function used in this way is called a *callback function*. You will see this term in the jQuery documentation.
+The parameter is called 'response' here, but you could call it whatever you want.
+The URL is this example returns JSON formatted text. JSON is literally the code for a javascript object, so javascript turns it into an object that you can use.
+
+*/
+
+$.get("http://api.openweathermap.org/data/2.5/weather?q=Brussels&units=metric", function (response) {
+
+    /* The JSON.stringify() method just takes the object and turns it back into text (aka, a string).
+    I'm only doing this here to show what the string looks like.*/
+
+
+
+    /* Working with the 'response' object (not string) here, now we can access the different properties available.
+    (Look at jsoneditoronline.org to see the structure of the properties.) */
+    var weather_description = response.weather[0].description ;
+    $('#parsed_json').append(weather_description);
+
+    var icon = response.weather[0].id;
+    icon = "<i class=\"wi wi-owm-" + icon + "\" style=\"font-size: 128px \"></i>";
+    $('#icon_img').html(icon);
+
+    var temp = response.main.temp;
+    temp = temp.toFixed(0) + "<i class=\"wi wi-celsius\"></i>";
+    $('#temp').html(temp);
+
+    var minTemp = response.main.temp_min;
+    minTemp = minTemp.toFixed(0) + "<i class=\"wi wi-celsius\"></i>";
+    $('#minTemp').html(minTemp);
+
+    var maxTemp = response.main.temp_max;
+    maxTemp = maxTemp.toFixed(0) + "<i class=\"wi wi-celsius\"></i>";
+    $('#maxTemp').html(maxTemp);
+
+
+});
+</script>
+</body>
+</html>
