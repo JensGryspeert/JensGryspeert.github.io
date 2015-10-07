@@ -1,0 +1,113 @@
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Jens Gryspeert | Portfolio</title>
+	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="font-awesome-4.4.0/css/font-awesome.min.css">
+  <link href='https://fonts.googleapis.com/css?family=Dancing+Script:700' rel='stylesheet' type='text/css'>
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700" rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/css?family=Raleway:400,600,700" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+</head>
+<body>
+	<div class="main-wrapper">
+	<header class="header-overlay">
+		<label style="color: rgb(255, 255, 255);" for="show-menu" class="header-show-menu">Menu</label>
+		<input id="show-menu" role="button" type="checkbox">
+		<nav>
+			<ul class="nav-page-links">
+				<li><a class="project-link" href="#home">Home</a></li>
+				<li><a class="project-link" href="#work">Work</a></li>
+				<li><a class="project-link" href="#contact">About</a></li>
+        <li><a class="project-link" href="#contact">Contact</a></li>
+
+			</ul>
+			<ul class="social-icons">
+				<li><a style="color: rgb(255, 255, 255);" class="" href="https://github.com/JensGryspeert"><span class="fa fa-github fa-2x"></span></a></li>
+				<li><a style="color: rgb(255, 255, 255);" class="" href="https://codepen.io/JensGryspeert"><span class="fa fa-codepen fa-2x"></span></a></li>
+				<li><a style="color: rgb(255, 255, 255);" class="" href="https://twitter.com/JensGryspeert"><span class="fa fa-twitter fa-2x"></span></a></li>
+			</ul>
+		</nav>
+		<div id="home" class="header-feature-lines">
+			<img src="http://i58.tinypic.com/6ehwuv.png" style="width:100px; height:100px">
+			<h2 class="logo-tagline">Web Development</h2>
+			<h1 class="intro-description">Dedicated to turning ideas into real apps</h1>
+			<div class="projects-link"><a href="#work">Check out my work below</a></div>
+		</div>
+	</header>
+	<div id = "work" class="project-container">
+		<h1 class="project-header">Projects</h1>
+		<div class="project">
+			<img src="http://i.imgur.com/PRFnHlb.png">
+			<div class="project-information">
+				<h2 class="project-title">Zipline: Build a Random Quote Machine</h2>
+				<ul class="project-technology-tags">
+					<li>HTML</li>
+					<li>CSS</li>
+					<li>Javascript</li>
+				</ul>
+				<p>
+					A very standard simulation of my Zipline - Quote Scrambler. Let's scramble some words</p>
+				<ul class="project-links">
+						<li><a style="color: rgb(187, 187, 187);" class="" href="http://codepen.io/JensGryspeert/full/qOmEWO"><i class="fa fa-codepen fa-2x"></i></a></li>
+				</ul>
+			</div>
+		</div>
+
+
+	</div>
+	<div class="contact-form-container">
+		<div id="contact-form-messages"></div>
+		<h1 class="contact-form-header">Contact Me</h1>
+		<form id="ajax-contact" method="post" action="#">
+			<div class="wide-col">
+				<div class="field">
+					<label for="name">Name</label>
+					<input id="name" name="name" required="" type="text">
+				</div>
+			</div>
+			<div class="wide-col">
+				<div class="field">
+					<label for="name">Email</label>
+					<input id="email" name="email" required="" type="email">
+				</div>
+			</div>
+			<div class="field">
+				<label for="message">Message</label>
+				<textarea id="message" name="message" required=""></textarea>
+			</div>
+			<div class="field">
+				<button type="submit">Send</button>
+			</div>
+		</form>
+	</div>
+	<footer>
+		<div class="row">
+			<div class="footer-image">
+				<img src="http://organicthemes.com/demo/profile/files/2012/12/profile_img.png">
+			</div>
+			<div id = "contact" class="footer-about">
+				<h3 class="footer-header">About Me</h3>
+				<p class="footer-about-text">My name is Jens Gryspeert and I am a 21-year-old front-end developer based in Kortrijk, Belgium. I enjoy experimenting with new web technologies; the latest book I'm reading is <a href="http://exploringjs.com">Exploring ES6</a>.</p>
+			</div>
+			<div class="footer-network">
+				<h3 class="footer-header">Around the Web</h3>
+				<ul class="social-icons">
+					<li><a href="https://github.com/JensGryspeert"><span class="fa fa-github fa-2x"></span></a></li>
+					<li><a href="https://codepen.io/JensGryspeert"><span class="fa fa-codepen fa-2x"></span></a></li>
+					<li><a href="https://twitter.com/JensGryspeert"><span class="fa fa-twitter fa-2x"></span></a></li>
+				</ul>
+				<p class="contact-info">You can reach me at<br><a href="mailto:jens.gryspeert@outlook.com">jens.gryspeert@outlook.com</a><br></p>
+			</div>
+		</div>
+		<hr>
+		<p class="copyright">Copyright 2015 © Jens Gryspeert. All Rights Reserved</p>
+	</footer>
+	</div>
+	
+
+</body>
+</html>
