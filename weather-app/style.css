@@ -20,3 +20,12 @@
 #maxTemp {
   color: #FF0000;
   }
+
+  .col-md-1 {
+    text-align: center;
+  }
+
+p.weekdays, #humidity{
+  font-family: 'Abel', sans-serif;
+  margin-left: 40px;
+}

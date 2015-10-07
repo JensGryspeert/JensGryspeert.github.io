@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="http://bootswatch.com/cosmo/bootstrap.min.css">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="css/weather-icons.css">
-
+  <link href='https://fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
   <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
   <title>Jens Gryspeert Weather App</title>
 
@@ -68,12 +68,58 @@
         <div id="maxTemp"></div>
     </div>
   </div>
+  <div class="row">
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-6">
+      <hr>
+    </div>
+    <div class="col-md-3">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-1">
+      <p class="weekdays">Humidity</p>
+    <div id="humidity" style="font-size: 40px"></div>
+    <p style = "margin-left: 83px; margin-top: -50px">%</p>
+    </div>
+    <div class="col-md-1">
+    </div>
+    <div class="col-md-1">
+    </div>
+    <div class="col-md-1">
+    </div>
+    <div class="col-md-1">
+    </div>
+    <div class="col-md-1">
+    </div>
+    <div class="col-md-3">
+    </div>
 </div>
 <script>
 document.getElementById("para1").innerHTML = formatAMPM();
+function convertTime(timestamp){
+  // Create a new JavaScript Date object based on the timestamp
+  // multiplied by 1000 so that the argument is in milliseconds, not seconds.
+  var date = new Date(timestamp*1000);
+  // Hours part from the timestamp
+  var hours = date.getHours();
+  // Minutes part from the timestamp
+  var minutes = "0" + date.getMinutes();
+  // Seconds part from the timestamp
+  var seconds = "0" + date.getSeconds();
+
+  // Will display time in 10:30:23 format
+  var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+
+  return formattedTime;
+}
 
 function formatAMPM() {
 var d = new Date(),
+
     minutes = d.getMinutes().toString().length == 1 ? '0'+d.getMinutes() : d.getMinutes(),
     hours = d.getHours().toString().length == 1 ? '0'+d.getHours() : d.getHours(),
     ampm = d.getHours() >= 12 ? '' : '',
@@ -82,27 +128,21 @@ var d = new Date(),
 return days[d.getDay()]+' '+months[d.getMonth()]+' '+d.getDate()+' '+d.getFullYear()+' '+hours+':'+minutes+ampm;
 }
 
-/*
-Here is the jQuery .get() function. There are some other jQuery functions that deal with Ajax, but this is a simple one.
-Notice the parameters that get() takes: a URL and an anonymous function.
-The anonymous function takes as a parameter, a variable that will hold the data that comes in from the URL (check out the URL in a browser to see what's there).
-A function used in this way is called a *callback function*. You will see this term in the jQuery documentation.
-The parameter is called 'response' here, but you could call it whatever you want.
-The URL is this example returns JSON formatted text. JSON is literally the code for a javascript object, so javascript turns it into an object that you can use.
+$.get("http://api.openweathermap.org/data/2.5/forecast?q=Kortrijk,be&units=metric", function (response) {
 
-*/
+      var iconMonday = response.list[8].weather[0].id;
+      iconMonday = "<i class=\"wi wi-owm-" + iconMonday + "\" style=\"font-size: 128px \"></i>";
+      $('#icon_img_monday').html(iconMonday);
 
-$.get("http://api.openweathermap.org/data/2.5/weather?q=Brussels&units=metric", function (response) {
+  });
 
-    /* The JSON.stringify() method just takes the object and turns it back into text (aka, a string).
-    I'm only doing this here to show what the string looks like.*/
+$.get("http://api.openweathermap.org/data/2.5/weather?q=Kortrijk&units=metric", function (response) {
 
-
-
-    /* Working with the 'response' object (not string) here, now we can access the different properties available.
-    (Look at jsoneditoronline.org to see the structure of the properties.) */
     var weather_description = response.weather[0].description ;
     $('#parsed_json').append(weather_description);
+
+    var humidity = response.main.humidity ;
+    $('#humidity').append(humidity);
 
     var icon = response.weather[0].id;
     icon = "<i class=\"wi wi-owm-" + icon + "\" style=\"font-size: 128px \"></i>";
